@@ -6,6 +6,8 @@ import re
 import sys
 import yaml
 
+from datetime import datetime
+
 region_codes = {
     'US East (Northern Virginia)': 'us-east-1',
     'US West (Oregon)': 'us-west-2',
@@ -75,7 +77,10 @@ def process(stream):
 
     return ip_info
 
+def report(ip_info):
+    return {'generated': datetime.utcnow(), 'regions': ip_info}
+
 if __name__ == '__main__':
     info = process(sys.stdin)
     print '---'
-    yaml.dump(info, sys.stdout)
+    yaml.dump(report(info), sys.stdout)
