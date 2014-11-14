@@ -9,10 +9,12 @@ import yaml
 from datetime import datetime
 
 region_codes = {
+    'China (Beijing)': 'cn-north-1',
     'US East (Northern Virginia)': 'us-east-1',
     'US West (Oregon)': 'us-west-2',
     'US West (Northern California)': 'us-west-1',
     'EU (Ireland)': 'eu-west-1',
+    'EU (Frankfurt)': 'eu-central-1',
     'Asia Pacific (Singapore)': 'ap-southeast-1',
     'Asia Pacific (Sydney)': 'ap-southeast-2',
     'Asia Pacific (Tokyo)': 'ap-northeast-1',
@@ -31,7 +33,7 @@ def parse_section(line):
 
 def parse_cidr(line):
     address = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
-    pat = r'^(%s/\d+) \((%s) - (%s)\)(?: NEW)?$' % (address, address, address)
+    pat = r'^(%s/\d+) \((%s) ?- ?(%s)\)(?: NEW)?$' % (address, address, address)
 
     match = re.search(pat, line)
     if not match:
